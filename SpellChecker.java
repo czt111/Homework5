@@ -82,9 +82,13 @@ public class SpellChecker {
 
             while (fileScanner.hasNext()) {
                 String word = fileScanner.next().toLowerCase();
-                ArrayList<String> suggestions = recommender.getWordSuggestions(word, 2, 0.5, 4);
-                if (!suggestions.isEmpty()) {
-                    handleMisspelledWord(word, suggestions, writer);
+                if (!recommender.isValid(word)) {
+                    ArrayList<String> suggestions = recommender.getWordSuggestions(word, 2, 0.5, 4);
+                    if (!suggestions.isEmpty()) {
+                        handleMisspelledWord(word, suggestions, writer);
+                    } else {
+                        writer.print(word + " ");
+                    }
                 } else {
                     writer.print(word + " ");
                 }

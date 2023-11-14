@@ -68,4 +68,8 @@ public class WordRecommender {
 
         return intersection.size() / (double) union.size();
     }
+
+    public boolean isValid(String word) {
+        return words.contains(word.toLowerCase());
+    }
 }
