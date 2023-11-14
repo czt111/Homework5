@@ -107,17 +107,24 @@ private void handleMisspelledWord(String misspelledWord, ArrayList<String> sugge
         System.out.printf("%d. '%s'%n", i + 1, suggestions.get(i));
     }
 
-    System.out.println("Press 'r' to replace, 'a' to accept, and 't' to enter a replacement manually.");
+    String choice = "";
+    while (!isValidChoice(choice)) {
+        System.out.println("Press 'r' to replace, 'a' to accept, and 't' to enter a replacement manually.");
 
-    Scanner scanner = new Scanner(System.in);
-    String choice = scanner.nextLine().toLowerCase();
+        Scanner scanner = new Scanner(System.in);
+        choice = scanner.nextLine().toLowerCase();
+    }
+    //System.out.println("Press 'r' to replace, 'a' to accept, and 't' to enter a replacement manually.");
+
+    Scanner scanner1 = new Scanner(System.in);
+    //String choice = scanner.nextLine().toLowerCase();
 
     switch (choice) {
         case "r":
             System.out.println("Your word will be replaced with the suggestion you choose.");
             System.out.println("Enter the number corresponding to the word that you want to use for replacement.");
 
-            int replacementIndex = scanner.nextInt();
+            int replacementIndex = scanner1.nextInt();
 
             if (replacementIndex >= 1 && replacementIndex <= suggestions.size()) {
                 replaceWord(misspelledWord, suggestions.get(replacementIndex - 1), writer);
@@ -133,8 +140,8 @@ private void handleMisspelledWord(String misspelledWord, ArrayList<String> sugge
         case "t":
             System.out.println("Please type the word that will be used as the replacement in the output file.");
 
-            scanner = new Scanner(System.in);
-            String replacementWord = scanner.nextLine();
+            scanner1 = new Scanner(System.in);
+            String replacementWord = scanner1.nextLine();
 
             replaceWord(misspelledWord, replacementWord, writer);
             break;
@@ -144,6 +151,9 @@ private void handleMisspelledWord(String misspelledWord, ArrayList<String> sugge
             break;
     }
 }
+    private boolean isValidChoice(String choice) {
+        return choice.equals("r") || choice.equals("a") || choice.equals("t");
+    }
     private void askForReplacement(String misspelledWord) {
         System.out.println("Press 'r' to replace, 'a' to accept, and 't' to enter a replacement manually.");
         Scanner scanner = new Scanner(System.in);
