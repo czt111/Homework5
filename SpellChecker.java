@@ -109,8 +109,12 @@ private void handleMisspelledWord(String misspelledWord, ArrayList<String> sugge
 
     String choice = "";
     while (!isValidChoice(choice)) {
-        System.out.println("Press 'r' to replace, 'a' to accept, and 't' to enter a replacement manually.");
-
+        if (choice == "") {
+            System.out.println("Press 'r' to replace, 'a' to accept, and 't' to enter a replacement manually.");
+        }
+        else {
+            System.out.println("Invalid choice. Press 'r' to replace, 'a' to accept, and 't' to enter a replacement manually.");
+        }
         Scanner scanner = new Scanner(System.in);
         choice = scanner.nextLine().toLowerCase();
     }
